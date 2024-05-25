@@ -4,9 +4,7 @@
     {
       "src": "src/main.ts",
       "use": "@vercel/node",
-      "scripts": {
-        "build": "prisma generate && nest build"
-      }
+      "prebuild": "prisma generate"
     }
   ],
   "routes": [
