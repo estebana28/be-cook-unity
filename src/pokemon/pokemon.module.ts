@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { PokemonController } from './pokemon.controller';
 import { PokemonService } from './pokemon.service';
+import { PokemonController } from './pokemon.controller';
 import { DatabaseModule } from 'src/database/database.module';
 
 @Module({

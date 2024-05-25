@@ -1,11 +1,11 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
-  Param,
-  Patch,
   Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { Prisma } from '@prisma/client';
@@ -13,6 +13,7 @@ import { Prisma } from '@prisma/client';
 @Controller('pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
+
   /*
   GET /pokemon
   GET /pokemon/:id
@@ -20,6 +21,11 @@ export class PokemonController {
   PATCH /pokemon/:id
   DELETE /pokemon/:id
   */
+
+  @Post() // POST /pokemon
+  create(@Body() createPokemon: Prisma.PokemonCreateInput) {
+    return this.pokemonService.create(createPokemon);
+  }
 
   @Get() // GET /pokemon
   findAll() {
@@ -29,11 +35,6 @@ export class PokemonController {
   @Get(':id') // GET /pokemon/:id
   findOne(@Param('id') id: string) {
     return this.pokemonService.findOne(+id);
-  }
-
-  @Post() // POST /pokemon
-  create(@Body() createPokemon: Prisma.PokemonCreateInput) {
-    return this.pokemonService.create(createPokemon);
   }
 
   @Patch(':id') // PATCH /pokemon/:id
