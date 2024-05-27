@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
+import { promisify } from 'util';
+import { readFile } from 'fs';
+
+const readFileAsync = promisify(readFile);
 
 @Injectable()
 export class PokemonService {
@@ -27,5 +31,11 @@ export class PokemonService {
 
   async delete(id: number) {
     return this.databaseService.pokemon.delete({ where: { id } });
+  }
+
+  async mockDataDB() {
+    const data = await readFileAsync('pokemon-data.json', 'utf8');
+    const pokemonData = JSON.parse(data);
+    return this.databaseService.pokemon.createMany({ data: pokemonData });
   }
 }

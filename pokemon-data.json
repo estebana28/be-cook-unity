@@ -1,0 +1,93 @@
+[
+  {
+    "id": 25,
+    "name": "pikachu",
+    "type": "ELECTRIC",
+    "description": "Pikachu that can generate powerful electricity have cheek sacs that are extra soft and super stretchy.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 55,
+    "hp": 35,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+    "weaknesses": ["FIGHTING"],
+    "resistances": ["STEEL"]
+  },
+  {
+    "id": 6,
+    "name": "charizard",
+    "type": "FIRE",
+    "description": "Charizard is a fire-type Dragon Pokémon that has six wings. It has the ability to fly.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 76,
+    "hp": 78,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+    "weaknesses": ["WATER"],
+    "resistances": []
+  },
+  {
+    "id": 95,
+    "name": "onix",
+    "type": "ROCK",
+    "description": "Onix has a magnet in its brain. It acts as a compass so that this Pokémon does not lose direction while it is tunneling. Onix is verysilent and does not move.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 45,
+    "hp": 45,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
+    "weaknesses": ["GRASS"],
+    "resistances": []
+  },
+  {
+    "id": 160,
+    "name": "feraligatr",
+    "type": "WATER",
+    "description": "Feraligatr is extremely territorial. It will ferociously tear apart any opponent that is not made of pure water by headbutting.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 82,
+    "hp": 85,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/160.png",
+    "weaknesses": ["ELECTRIC"],
+    "resistances": []
+  },
+  {
+    "id": 215,
+    "name": "sneasel",
+    "type": "DARK",
+    "description": "Sneasel scales trees by punching its hooked claws into the bark. It seeks out unguarded nests and steals eggs.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 95,
+    "hp": 55,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/215.png",
+    "weaknesses": ["GRASS"],
+    "resistances": []
+  },
+  {
+    "id": 212,
+    "name": "scizor",
+    "type": "BUG",
+    "description": "Scizor has a body with the hardness of steel. It is not easily fazed by ordinary sorts of attacks.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 100,
+    "hp": 70,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",
+    "weaknesses": ["FIRE"],
+    "resistances": ["PSYCHIC"]
+  },
+  {
+    "id": 252,
+    "name": "Treecko",
+    "type": "GRASS",
+    "description": "Treecko is cool, calm, and collected—it won't let mud abrasion destroy its body. It lives in large colonies called森林.",
+    "rarity": "common",
+    "expansion": "base",
+    "attack": 55,
+    "hp": 40,
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/252.png",
+    "weaknesses": ["FIRE"],
+    "resistances": ["WATER"]
+  }
+]

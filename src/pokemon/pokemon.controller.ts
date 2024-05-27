@@ -32,6 +32,11 @@ export class PokemonController {
     return this.pokemonService.findAll();
   }
 
+  @Get('/all') // GET /pokemon/all
+  mockDataDB() {
+    return this.pokemonService.mockDataDB();
+  }
+
   @Get(':id') // GET /pokemon/:id
   findOne(@Param('id') id: string) {
     return this.pokemonService.findOne(+id);
