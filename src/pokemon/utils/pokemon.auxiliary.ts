@@ -1,5 +1,5 @@
 import type { Pokemon } from '@prisma/client';
-import type { Modificator, Result } from '../types';
+import type { Modificator, Result } from '../../lib/types';
 
 export const getWeaknessOrResistance = (
   contester: Pokemon,

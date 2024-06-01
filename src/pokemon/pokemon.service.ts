@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PokemonRepository } from './pokemon.repository';
 import { promisify } from 'util';
 import { readFile } from 'fs';
-import { calculateBattleResult } from 'src/lib/pokemon/pokemon.auxiliary';
+import { calculateBattleResult } from './utils/pokemon.auxiliary';
 
 const readFileAsync = promisify(readFile);
 
