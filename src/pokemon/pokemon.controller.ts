@@ -54,4 +54,9 @@ export class PokemonController {
   delete(@Param('id') id: string) {
     return this.pokemonService.delete(+id);
   }
+
+  @Get('/battle/:id/:against') // POST /pokemon/battle/:id/:against
+  getBattleResult(@Param('id') id: string, @Param('against') against: string) {
+    return this.pokemonService.getBattleResult(+id, +against);
+  }
 }

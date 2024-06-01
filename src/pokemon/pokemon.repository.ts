@@ -11,7 +11,14 @@ export class PokemonRepository {
       const createdPokemon = await this.databaseService.pokemon.create({
         data: createPokemon,
       });
-      return createdPokemon;
+      if (!createdPokemon) {
+        throw new HttpException(
+          'ERROR_CREATING_POKEMON',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        return createdPokemon;
+      }
     } catch (error) {
       console.log('ERROR_CREATING_POKEMON', error);
       throw new HttpException('ERROR_CREATING_POKEMON', HttpStatus.BAD_REQUEST);
@@ -20,7 +27,15 @@ export class PokemonRepository {
 
   async findAll() {
     try {
-      return await this.databaseService.pokemon.findMany();
+      const allPokemon = await this.databaseService.pokemon.findMany();
+      if (!allPokemon) {
+        throw new HttpException(
+          'ERROR_FINDING_ALL_POKEMONS',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        return allPokemon;
+      }
     } catch (error) {
       console.log('ERROR_FINDING_ALL_POKEMONS', error);
       throw new HttpException(
@@ -32,7 +47,17 @@ export class PokemonRepository {
 
   async findOne(id: number) {
     try {
-      return await this.databaseService.pokemon.findUnique({ where: { id } });
+      const pokemon = await this.databaseService.pokemon.findUnique({
+        where: { id },
+      });
+      if (!pokemon) {
+        throw new HttpException(
+          'ERROR_FINDING_POKEMON',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        return pokemon;
+      }
     } catch (error) {
       console.log('ERROR_FINDING_POKEMON', error);
       throw new HttpException('ERROR_FINDING_POKEMON', HttpStatus.BAD_REQUEST);
@@ -45,7 +70,14 @@ export class PokemonRepository {
         where: { id },
         data: updatePokemon,
       });
-      return updatedPokemonDB;
+      if (!updatedPokemonDB) {
+        throw new HttpException(
+          'ERROR_UPDATING_POKEMON',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        return updatedPokemonDB;
+      }
     } catch (error) {
       console.log('ERROR_UPDATING_POKEMON', error);
       throw new HttpException('ERROR_UPDATING_POKEMON', HttpStatus.BAD_REQUEST);
@@ -54,7 +86,17 @@ export class PokemonRepository {
 
   async delete(id: number) {
     try {
-      return await this.databaseService.pokemon.delete({ where: { id } });
+      const deletedPokemon = await this.databaseService.pokemon.delete({
+        where: { id },
+      });
+      if (!deletedPokemon) {
+        throw new HttpException(
+          'ERROR_DELETING_POKEMON',
+          HttpStatus.BAD_REQUEST,
+        );
+      } else {
+        return deletedPokemon;
+      }
     } catch (error) {
       console.log('ERROR_DELETING_POKEMON', error);
       throw new HttpException('ERROR_DELETING_POKEMON', HttpStatus.BAD_REQUEST);

@@ -1,18 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PokemonRepository } from './pokemon.repository';
-import { DatabaseService } from 'src/database/database.service';
 import { promisify } from 'util';
 import { readFile } from 'fs';
+import { calculateBattleResult } from 'src/lib/pokemon/pokemon.auxiliary';
 
 const readFileAsync = promisify(readFile);
 
 @Injectable()
 export class PokemonService {
-  constructor(
-    private readonly databaseService: DatabaseService,
-    private readonly pokemonRepository: PokemonRepository,
-  ) {}
+  constructor(private readonly pokemonRepository: PokemonRepository) {}
 
   async create(createPokemon: Prisma.PokemonCreateInput) {
     const newPokemon = await this.pokemonRepository.create({
@@ -28,6 +25,9 @@ export class PokemonService {
 
   async findOne(id: number) {
     const pokemon = await this.pokemonRepository.findOne(id);
+    if (!pokemon) {
+      throw new HttpException('ERROR_FINDING_POKEMON', HttpStatus.BAD_REQUEST);
+    }
     return pokemon;
   }
 
@@ -48,5 +48,15 @@ export class PokemonService {
     const data = await readFileAsync('pokemon-data.json', 'utf8');
     const pokemonData = JSON.parse(data);
     return this.pokemonRepository.mockDataDB(pokemonData);
+  }
+
+  async getBattleResult(id: number, against: number) {
+    const pokemon = await this.pokemonRepository.findOne(id);
+    const againstPokemon = await this.pokemonRepository.findOne(against);
+    if (!pokemon || !againstPokemon) {
+      throw new HttpException('ERROR_FINDING_POKEMON', HttpStatus.BAD_REQUEST);
+    }
+    const result = await calculateBattleResult(pokemon, againstPokemon);
+    return result;
   }
 }
