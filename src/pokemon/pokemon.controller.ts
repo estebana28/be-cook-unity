@@ -32,7 +32,7 @@ export class PokemonController {
     return this.pokemonService.findAll();
   }
 
-  @Get('/all') // GET /pokemon/all
+  @Get('/all') // GET /pokemon/all Mock data
   mockDataDB() {
     return this.pokemonService.mockDataDB();
   }
