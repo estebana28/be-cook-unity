@@ -67,7 +67,10 @@ export class PokemonService {
       ? await Promise.all(resistantAgainstPromises)
       : undefined;
 
-    return { weakAgainst, resistantAgainst };
+    return {
+      weakAgainst: weakAgainst?.[0],
+      resistantAgainst: resistantAgainst?.[0],
+    };
   }
 
   async getBattleResult(id: number, against: number) {

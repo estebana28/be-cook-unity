@@ -55,7 +55,7 @@ export class PokemonController {
     return this.pokemonService.delete(+id);
   }
 
-  @Get('weak-and-resist/:id') // GET /pokemon/:id/weakAndResist
+  @Get('weak-and-resist/:id') // GET /pokemon/weakAndResist/:id
   getWeakAndResist(@Param('id') id: string) {
     return this.pokemonService.getWeakAndResist(+id);
   }
