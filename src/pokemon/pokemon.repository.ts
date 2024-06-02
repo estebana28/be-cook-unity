@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
-import { Prisma } from '@prisma/client';
+import { $Enums, Prisma } from '@prisma/client';
 
 @Injectable()
 export class PokemonRepository {
@@ -110,6 +110,21 @@ export class PokemonRepository {
       console.log('ERROR_CREATING_MOCKED_POKEMONS', error);
       throw new HttpException(
         'ERROR_CREATING_MOCKED_POKEMONS',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  async findByType(type: $Enums.Type) {
+    try {
+      const resultByType = await this.databaseService.pokemon.findMany({
+        where: { type },
+      });
+      return resultByType;
+    } catch (error) {
+      console.log('ERROR_FINDING_POKEMONS_BY_TYPE', error);
+      throw new HttpException(
+        'ERROR_FINDING_POKEMONS_BY_TYPE',
         HttpStatus.BAD_REQUEST,
       );
     }

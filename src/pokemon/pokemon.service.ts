@@ -50,12 +50,29 @@ export class PokemonService {
     return this.pokemonRepository.mockDataDB(pokemonData);
   }
 
+  async getWeakAndResist(id: number) {
+    const pokemon = await this.pokemonRepository.findOne(id);
+    const weakAgainstPromises = await pokemon.weaknesses?.map(
+      async (weakness) => await this.pokemonRepository.findByType(weakness),
+    );
+    const resistantAgainstPromises = await pokemon.resistances?.map(
+      (resistance) => this.pokemonRepository.findByType(resistance),
+    );
+
+    const weakAgainst = weakAgainstPromises
+      ? await Promise.all(weakAgainstPromises)
+      : undefined;
+
+    const resistantAgainst = resistantAgainstPromises
+      ? await Promise.all(resistantAgainstPromises)
+      : undefined;
+
+    return { weakAgainst, resistantAgainst };
+  }
+
   async getBattleResult(id: number, against: number) {
     const pokemon = await this.pokemonRepository.findOne(id);
     const againstPokemon = await this.pokemonRepository.findOne(against);
-    if (!pokemon || !againstPokemon) {
-      throw new HttpException('ERROR_FINDING_POKEMON', HttpStatus.BAD_REQUEST);
-    }
     const result = await calculateBattleResult(pokemon, againstPokemon);
     return result;
   }
