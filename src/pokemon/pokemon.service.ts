@@ -68,8 +68,8 @@ export class PokemonService {
       : undefined;
 
     return {
-      weakAgainst: weakAgainst?.[0],
-      resistantAgainst: resistantAgainst?.[0],
+      weakAgainst: weakAgainst?.[0][0],
+      resistantAgainst: resistantAgainst?.[0][0],
     };
   }
 
