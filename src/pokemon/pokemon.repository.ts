@@ -105,7 +105,10 @@ export class PokemonRepository {
 
   async mockDataDB(pokemonData: Prisma.PokemonCreateInput[]) {
     try {
-      return this.databaseService.pokemon.createMany({ data: pokemonData });
+      return this.databaseService.pokemon.createMany({
+        data: pokemonData,
+        skipDuplicates: true,
+      });
     } catch (error) {
       console.log('ERROR_CREATING_MOCKED_POKEMONS', error);
       throw new HttpException(
