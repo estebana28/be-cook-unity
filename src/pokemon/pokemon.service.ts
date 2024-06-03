@@ -1,5 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Pokemon, Prisma } from '@prisma/client';
+import { PokemonModificatorsResponse } from '../lib/types/pokemon.types';
 import { PokemonRepository } from './pokemon.repository';
 import { promisify } from 'util';
 import { readFile } from 'fs';
@@ -59,18 +60,20 @@ export class PokemonService {
       (resistance) => this.pokemonRepository.findByType(resistance),
     );
 
-    const weakAgainst = weakAgainstPromises
-      ? await Promise.all(weakAgainstPromises)
-      : undefined;
+    const weakAgainstArrays = await Promise.all(weakAgainstPromises);
+    const weakAgainst: Pokemon[] = weakAgainstArrays.flat();
 
-    const resistantAgainst = resistantAgainstPromises
-      ? await Promise.all(resistantAgainstPromises)
-      : undefined;
+    const resistantAgainstArrays = await Promise.all(resistantAgainstPromises);
+    const resistantAgainst: Pokemon[] = resistantAgainstArrays.flat();
 
-    return {
-      weakAgainst: weakAgainst?.[0],
-      resistantAgainst: resistantAgainst?.[0],
+    const response: PokemonModificatorsResponse = {
+      modificators: {
+        weakAgainst: weakAgainst || [],
+        resistantAgainst: resistantAgainst || [],
+      },
     };
+
+    return response;
   }
 
   async getBattleResult(id: number, against: number) {
